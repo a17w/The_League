@@ -27,22 +27,26 @@ void displayData(string names[], int wins[], int size);
 
 /* main function */
 
-int main() {
-
+int main()
+{
     // declaring constance variable
     const int TEAMSIZE = 5;
     string teamNames[TEAMSIZE] = {};
     int teamWins[TEAMSIZE] = {};
 
     initializeArrays(teamNames, teamWins, TEAMSIZE);
+    sortData(teamNames, teamWins, TEAMSIZE);
+    cout << endl;
+    displayData(teamNames, teamWins, TEAMSIZE);
 
     return 0;
 }
 
 
-/* function definitions */
+/* function headers */
 
-void initializeArrays(string names[], int wins[], int size) {
+void initializeArrays(string names[], int wins[], int size)
+{
 
     for (int i = 0; i < size; i++)
     {
@@ -54,10 +58,41 @@ void initializeArrays(string names[], int wins[], int size) {
 
 }
 
-void sortData(string names[], int wins[], int size) {
+void sortData(string names[], int wins[], int size)
+{
+    int swapWins;
+    string swapNames;
+    bool swap;
 
+    do {
+        swap = false;
+
+        for (int i = 0; i < size-1; i++)
+        {
+
+            if (wins[i] < wins[i + 1])
+            {
+                swapWins = wins[i];
+                wins[i] = wins[i + 1];
+                wins[i + 1] = swapWins;
+
+                swapNames = names[i];
+                names[i] = names[i + 1];
+                names[i + 1] = swapNames;
+
+                swap = true;
+            }
+
+        }
+    } while (swap);
 }
 
-void displayData(string names[], int wins[], int size) {
+void displayData(string names[], int wins[], int size)
+{
+    cout << "League Standing:" << endl;
+    for (int i = 0; i < size; i++)
+    {
+        cout << names[i] << ": " << wins[i] << endl;
 
+    }
 }
